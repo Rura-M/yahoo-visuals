@@ -2,6 +2,8 @@ import requests
 import matplotlib.pyplot as plt
 import pandas as pd
 from datetime import datetime
+import sqlalchemy
+from sqlalchemy import create_engine
 
 # Check to see if a connection is established
 def fetchStockData(symbol):
@@ -49,10 +51,13 @@ def attachEvents(inputdata):
 symbol = 'AAPL'
 data = {}
 responce = fetchStockData(symbol)
-print(data)
+#print(data)
 
 data["Timestamp"] = parseTimestamp(responce)
 data["Values"] = parseValues(responce)
 data["Events"] = attachEvents(responce)
 df = pd.DataFrame(data)
-print(df)
+#print(df)
+
+engine = create_engine('mysql://root:codio@localhost/stock_data')
+df.to_sql('stocks', con=engine, if_exists='replace', index=False)
