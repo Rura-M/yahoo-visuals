@@ -1,4 +1,7 @@
 import requests
+import matplotlib.pyplot as plt
+import pandas as pd
+from datetime import datetime
 
 # Check to see if a connection is established
 def fetchStockData(symbol):
@@ -18,8 +21,38 @@ def fetchStockData(symbol):
     else:
       return None
     
+def parseTimestamp(inputdata):
+      timestamplist = []
+      timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
+      timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
+      calendertime = []
+      for ts in timestamplist:
+        dt = datetime.fromtimestamp(ts)
+        calendertime.append(dt.strftime("%m/%d/%Y"))
+      return calendertime
+    
+def parseValues(inputdata):
+      valueList = []
+      valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
+      valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["close"])
+      return valueList 
+    
+def attachEvents(inputdata):
+      eventlist = []
+      for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
+        eventlist.append("open")  
+      for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
+        eventlist.append("close")
+      return eventlist    
+    
 ########################################################  
 symbol = 'AAPL'
-
-data = fetchStockData(symbol)
+data = {}
+responce = fetchStockData(symbol)
 print(data)
+
+data["Timestamp"] = parseTimestamp(responce)
+data["Values"] = parseValues(responce)
+data["Events"] = attachEvents(responce)
+df = pd.DataFrame(data)
+print(df)
