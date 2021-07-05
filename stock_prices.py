@@ -79,7 +79,7 @@ def update_database(df):
     df.to_sql('stocks', con=engine, if_exists='append', index=False)
     os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
 
-        
+
 def line_plot(df):
     df.plot(kind='line', x='Timestamp', y='Values', color='red')
     plt.title('Variation of stock price over time')
@@ -99,7 +99,8 @@ def boxplot(df):
     
 def histogram(df):
     df['Timestamp'] = pd.to_datetime('',
-                                     df['Timestamp'], infer_datetime_format=True)
+                                     df['Timestamp'], 
+                                     infer_datetime_format=True)
     plt.clf()
     df['Timestamp'].map(lambda d: d.month).plot(kind='hist')
     plt.show()
