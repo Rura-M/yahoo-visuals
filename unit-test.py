@@ -7,6 +7,7 @@ class TestFileName(unittest.TestCase):
         symbol = 'AAPL'
         self.assertTrue(fetchStockData(symbol), None)
 
+
 if __name__ == '__main__':
     unittest.main()
     
