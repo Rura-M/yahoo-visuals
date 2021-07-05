@@ -18,23 +18,24 @@ def menu():
       5. Histogram
     ''')
 
-    
+
 def fetchStockData(symbol):
-    url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
+   url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
     
-    headers = {
+   headers = {
         'x-rapidapi-key': "4b9c386372msh305d0f5e33cb633p1cee26jsn477776e57ef8",
         'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com"
-    }
+   }
 
-    querystring = {"region": "US", "symbol": symbol, "interval": "1d", "range": "3mo"}
+   querystring = {"region": "US", "symbol": symbol, 
+                  "interval": "1d", "range": "3mo"}
 
-    response = requests.get(url, headers=headers, params=querystring)
+   response = requests.get(url, headers=headers, params=querystring)
 
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return None
+   if response.status_code == 200:
+       return response.json()
+   else:
+       return None
 
     
 def parseTimestamp(inputdata):
@@ -77,7 +78,7 @@ def update_database(df):
 
         
 def line_plot(df):
-    df.plot(kind='line',x='Timestamp',y='Values',color='red')
+    df.plot(kind='line', x='Timestamp', y='Values', color='red')
     plt.title('Variation of stock price over time')
     plt.ylabel('Values')
     plt.xlabel('Time')
@@ -145,5 +146,5 @@ while option != 0:
     menu()
     option = handle_option(input('Enter your option: '))
 
-#Data visualizaztions
-#https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
+# Data visualizaztions
+# https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
