@@ -105,8 +105,6 @@ def handle_option(option):
         return int(option)
     except:
         return -1
-    finally:
-        continue
 
 
 # MAIN 
