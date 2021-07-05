@@ -87,7 +87,7 @@ def line_plot(df):
     plt.xlabel('Time')
     plt.show()
 
-        
+
 def boxplot(df):
     fig = plt.figure()
     box = fig.add_subplot()
