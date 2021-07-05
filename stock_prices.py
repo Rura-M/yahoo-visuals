@@ -65,7 +65,7 @@ def attachEvents(inputdata):
         eventlist.append("open")
     for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
         eventlist.append("close")
-    return eventlist    
+    return eventlist
 
 
 def create_database(df):
@@ -146,8 +146,7 @@ while option != 0:
     elif option == 5:
         histogram(df)
     else:
-        print('\nInvalid choice, select another option')
-      
+        print('\nInvalid choice, select another option') 
     menu()
     option = handle_option(input('Enter your option: '))
 
