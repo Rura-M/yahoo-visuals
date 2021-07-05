@@ -28,7 +28,7 @@ def fetchStockData(symbol):
     }
 
     querystring = {"region": "US", "symbol": symbol, 
-                   "interval": "1d", "range": "3mo"}
+     "interval": "1d", "range": "3mo"}
 
     response = requests.get(url, headers=headers, params=querystring)
 
@@ -44,8 +44,8 @@ def parseTimestamp(inputdata):
     timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
     calendertime = []
     for ts in timestamplist:
-       dt = datetime.fromtimestamp(ts)
-       calendertime.append(dt.strftime("%m/%d/%Y"))
+         dt = datetime.fromtimestamp(ts)
+         calendertime.append(dt.strftime("%m/%d/%Y"))
     return calendertime
 
 
@@ -58,7 +58,7 @@ def parseValues(inputdata):
     
 def attachEvents(inputdata):
     eventlist = []
-    for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
+    for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
       eventlist.append("open")  
     for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
       eventlist.append("close")
@@ -66,23 +66,23 @@ def attachEvents(inputdata):
 
 
 def create_database(df):
-      engine = create_engine('mysql://root:codio@localhost/stock_data')
-      df.to_sql('stocks', con=engine, if_exists='replace', index=False)
-      os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
+    engine = create_engine('mysql://root:codio@localhost/stock_data')
+    df.to_sql('stocks', con=engine, if_exists='replace', index=False)
+    os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
 
 
 def update_database(df):
-      engine = create_engine('mysql://root:codio@localhost/stock_data')
-      df.to_sql('stocks', con=engine, if_exists='append', index=False)
-      os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
+    engine = create_engine('mysql://root:codio@localhost/stock_data')
+    df.to_sql('stocks', con=engine, if_exists='append', index=False)
+    os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
 
         
 def line_plot(df):
-      df.plot(kind='line',x='Timestamp',y='Values',color='red')
-      plt.title('Variation of stock price over time')
-      plt.ylabel('Values')
-      plt.xlabel('Time')
-      plt.show()
+    df.plot(kind='line',x='Timestamp',y='Values',color='red')
+    plt.title('Variation of stock price over time')
+    plt.ylabel('Values')
+    plt.xlabel('Time')
+    plt.show()
 
         
 def boxplot(df):
@@ -101,17 +101,18 @@ def histogram(df):
     plt.show()
  
 
-
 def handle_option(option):
     try:
         return int(option)
     except:
         return -1    
-########################################################  
+
+
+# MAIN 
 symbol = 'AAPL'
 data = {}
 responce = fetchStockData(symbol)
-#print(data)
+# print(data)
 
 data["Timestamp"] = parseTimestamp(responce)
 data["Values"] = parseValues(responce)
