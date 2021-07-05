@@ -99,7 +99,7 @@ def boxplot(df):
 
 def histogram(df):
     df['Timestamp'] = pd.to_datetime('',
-                                     df['Timestamp'], 
+                                     df['Timestamp'],
                                      infer_datetime_format=True)
     plt.clf()
     df['Timestamp'].map(lambda d: d.month).plot(kind='hist')
