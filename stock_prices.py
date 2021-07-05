@@ -8,17 +8,19 @@ import os
 
 
 def menu():
-  print('''
-  This program displays how stock prices vary. Please choose an option:
+    print('''
+     This program displays how stock prices vary. Please choose an option:
     
-    0. Exit
-    1. Create Database
-    2. Update Database
-    3. Line Plot
-    4. Boxplot
-    5. Histogram
-  '''
-  )
+      0. Exit
+      1. Create Database
+      2. Update Database
+      3. Line Plot
+      4. Boxplot
+      5. Histogram
+    '''
+        )
+    
+    
 # Check to see if a connection is established
 def fetchStockData(symbol):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
