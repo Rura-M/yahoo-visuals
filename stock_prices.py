@@ -26,14 +26,14 @@ def fetchStockData(symbol):
         'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com"
     }
 
-    querystring = {"region": "US", "symbol": symbol, 
-    "interval": "1d", "range": "3mo"}
+    querystring = {'',
+      "region": "US", "symbol": symbol, "interval": "1d", "range": "3mo"}
     response = requests.get(url, headers=headers, params=querystring)
 
     if response.status_code == 200:
-       return response.json()
+        return response.json()
     else:
-       return None
+        return None
 
     
 def parseTimestamp(inputdata):
@@ -52,7 +52,7 @@ def parseValues(inputdata):
     valueList.extend(inputdata["chart"]["result"][0]
     ["indicators"]["quote"][0]["open"])
     valueList.extend(inputdata["chart"]["result"][0]
-    ["indicators"]["quote"][0]["close"])
+  ["indicators"]["quote"][0]["close"])
     return valueList 
 
 
@@ -95,7 +95,8 @@ def boxplot(df):
 
     
 def histogram(df):
-    df['Timestamp'] = pd.to_datetime(df['Timestamp'], infer_datetime_format=True)
+    df['Timestamp'] = pd.to_datetime('',
+      df['Timestamp'], infer_datetime_format=True)
     plt.clf()
     df['Timestamp'].map(lambda d: d.month).plot(kind='hist')
     plt.show()
