@@ -20,21 +20,21 @@ def menu():
 
 
 def fetchStockData(symbol):
-   url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
+    url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
     
-   headers = {
+    headers = {
         'x-rapidapi-key': "4b9c386372msh305d0f5e33cb633p1cee26jsn477776e57ef8",
         'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com"
-   }
+    }
 
-   querystring = {"region": "US", "symbol": symbol, 
+    querystring = {"region": "US", "symbol": symbol, 
                   "interval": "1d", "range": "3mo"}
 
-   response = requests.get(url, headers=headers, params=querystring)
+    response = requests.get(url, headers=headers, params=querystring)
 
-   if response.status_code == 200:
+    if response.status_code == 200:
        return response.json()
-   else:
+    else:
        return None
 
     
@@ -54,8 +54,8 @@ def parseValues(inputdata):
     valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
     valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["close"])
     return valueList 
- 
-    
+
+
 def attachEvents(inputdata):
     eventlist = []
     for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
@@ -99,7 +99,7 @@ def histogram(df):
     plt.clf()
     df['Timestamp'].map(lambda d: d.month).plot(kind='hist')
     plt.show()
- 
+
 
 def handle_option(option):
     try:
