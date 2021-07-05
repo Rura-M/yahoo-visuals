@@ -17,7 +17,7 @@ def menu():
       4. Boxplot
       5. Histogram
     ''')
-    
+
     
 def fetchStockData(symbol):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
@@ -27,8 +27,7 @@ def fetchStockData(symbol):
         'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com"
     }
 
-    querystring = {"region": "US", "symbol": symbol, 
-     "interval": "1d", "range": "3mo"}
+    querystring = {"region": "US", "symbol": symbol, "interval": "1d", "range": "3mo"}
 
     response = requests.get(url, headers=headers, params=querystring)
 
@@ -44,8 +43,8 @@ def parseTimestamp(inputdata):
     timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
     calendertime = []
     for ts in timestamplist:
-         dt = datetime.fromtimestamp(ts)
-         calendertime.append(dt.strftime("%m/%d/%Y"))
+        dt = datetime.fromtimestamp(ts)
+        calendertime.append(dt.strftime("%m/%d/%Y"))
     return calendertime
 
 
@@ -60,7 +59,7 @@ def attachEvents(inputdata):
     eventlist = []
     for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
       eventlist.append("open")  
-    for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
+    for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
       eventlist.append("close")
     return eventlist    
 
@@ -105,7 +104,9 @@ def handle_option(option):
     try:
         return int(option)
     except:
-        return -1    
+        return -1
+    finally:
+        continue
 
 
 # MAIN 
@@ -118,7 +119,7 @@ data["Timestamp"] = parseTimestamp(responce)
 data["Values"] = parseValues(responce)
 data["Events"] = attachEvents(responce)
 df = pd.DataFrame(data)
-#print(df)
+# print(df)
 
 menu()
 option = handle_option(input('Enter your option: '))
