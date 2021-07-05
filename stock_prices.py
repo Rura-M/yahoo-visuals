@@ -14,6 +14,9 @@ def menu():
     0. Exit
     1. Create Database
     2. Update Database
+    3. Line Plot
+    4. Boxplot
+    5. Histogram
   '''
   )
 # Check to see if a connection is established
@@ -69,7 +72,27 @@ def update_database(df):
       df.to_sql('stocks', con=engine, if_exists='append', index=False)
       os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
 
-      
+def line_plot(df):
+      df.plot(kind='line',x='Timestamp',y='Values',color='red')
+      plt.title('Variation of stock price over time')
+      plt.ylabel('Values')
+      plt.xlabel('Time')
+      plt.show()
+
+def boxplot(df):
+    fig = plt.figure()
+    box = fig.add_subplot()
+    box.line(x=df['Values'], vert=False)
+    box.set_xlabel('Values')
+    box.set_title('Distribution of ' + 'values')
+    plt.show()
+
+def histogram(df):
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'], infer_datetime_format=True)
+    plt.clf()
+    df['Timestamp'].map(lambda d: d.month).plot(kind='hist')
+    plt.show()
+  
 def handle_option(option):
     try:
         return int(option)
@@ -100,8 +123,18 @@ while option != 0:
         else:
           continue
     elif option == 2:
-        update_database(df)  
+        update_database(df) 
+    elif option == 3:
+        line_plot(df)
+    elif option == 4:
+        boxplot(df)
+    elif option == 5:
+        histogram(df)
     else:
         print('\nInvalid choice, select another option')
+      
     menu()
     option = handle_option(input('Enter your option: '))
+
+#Data visualizaztions
+#https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
