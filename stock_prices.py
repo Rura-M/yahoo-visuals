@@ -4,7 +4,18 @@ import pandas as pd
 from datetime import datetime
 import sqlalchemy
 from sqlalchemy import create_engine
+import os
 
+
+def menu():
+  print('''
+  This program displays how stock prices vary. Please choose an option:
+    
+    0. Exit
+    1. Create Database
+    2. Update Database
+  '''
+  )
 # Check to see if a connection is established
 def fetchStockData(symbol):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
@@ -47,6 +58,23 @@ def attachEvents(inputdata):
         eventlist.append("close")
       return eventlist    
     
+def create_database(df):
+      engine = create_engine('mysql://root:codio@localhost/stock_data')
+      df.to_sql('stocks', con=engine, if_exists='replace', index=False)
+      os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
+
+
+def update_database(df):
+      engine = create_engine('mysql://root:codio@localhost/stock_data')
+      df.to_sql('stocks', con=engine, if_exists='append', index=False)
+      os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
+
+      
+def handle_option(option):
+    try:
+        return int(option)
+    except:
+        return -1    
 ########################################################  
 symbol = 'AAPL'
 data = {}
@@ -59,5 +87,21 @@ data["Events"] = attachEvents(responce)
 df = pd.DataFrame(data)
 #print(df)
 
-engine = create_engine('mysql://root:codio@localhost/stock_data')
-df.to_sql('stocks', con=engine, if_exists='replace', index=False)
+menu()
+option = handle_option(input('Enter your option: '))
+
+while option != 0:
+    if option == 1:
+        print('EXISTING FILE WILL BE OVERWRITTEN')
+        print('Are you sure you want to continue? (y/n)')
+        choice = input()
+        if choice == 'y':
+          create_database(df)
+        else:
+          continue
+    elif option == 2:
+        update_database(df)  
+    else:
+        print('\nInvalid choice, select another option')
+    menu()
+    option = handle_option(input('Enter your option: '))
