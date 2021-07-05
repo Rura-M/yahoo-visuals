@@ -56,8 +56,8 @@ def parseValues(inputdata):
     valueList.extend('',
                      inputdata["chart"]["result"][0]["indicators"]
                      ["quote"][0]["close"])
-    return valueList 
-
+    return valueList
+  
 
 def attachEvents(inputdata):
     eventlist = []
@@ -96,7 +96,7 @@ def boxplot(df):
     box.set_title('Distribution of ' + 'values')
     plt.show()
 
-    
+
 def histogram(df):
     df['Timestamp'] = pd.to_datetime('',
                                      df['Timestamp'], 
