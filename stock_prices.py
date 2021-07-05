@@ -27,39 +27,44 @@ def fetchStockData(symbol):
         'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com"
     }
 
-    querystring = {"region": "US", "symbol": symbol, "interval": "1d", "range": "3mo"}
+    querystring = {"region": "US", "symbol": symbol, 
+                   "interval": "1d", "range": "3mo"}
 
     response = requests.get(url, headers=headers, params=querystring)
 
     if response.status_code == 200:
-      return response.json()
+        return response.json()
     else:
-      return None
+        return None
+
     
 def parseTimestamp(inputdata):
-      timestamplist = []
-      timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
-      timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
-      calendertime = []
-      for ts in timestamplist:
-        dt = datetime.fromtimestamp(ts)
-        calendertime.append(dt.strftime("%m/%d/%Y"))
-      return calendertime
-    
+    timestamplist = []
+    timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
+    timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
+    calendertime = []
+    for ts in timestamplist:
+       dt = datetime.fromtimestamp(ts)
+       calendertime.append(dt.strftime("%m/%d/%Y"))
+    return calendertime
+
+
 def parseValues(inputdata):
-      valueList = []
-      valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
-      valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["close"])
-      return valueList 
+    valueList = []
+    valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
+    valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["close"])
+    return valueList 
+ 
     
 def attachEvents(inputdata):
-      eventlist = []
-      for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
-        eventlist.append("open")  
-      for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
-        eventlist.append("close")
-      return eventlist    
-    
+    eventlist = []
+    for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
+      eventlist.append("open")  
+    for i in range(0,len(inputdata["chart"]["result"][0]["timestamp"])):
+      eventlist.append("close")
+    return eventlist    
+
+
 def create_database(df):
       engine = create_engine('mysql://root:codio@localhost/stock_data')
       df.to_sql('stocks', con=engine, if_exists='replace', index=False)
@@ -71,6 +76,7 @@ def update_database(df):
       df.to_sql('stocks', con=engine, if_exists='append', index=False)
       os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
 
+        
 def line_plot(df):
       df.plot(kind='line',x='Timestamp',y='Values',color='red')
       plt.title('Variation of stock price over time')
@@ -78,6 +84,7 @@ def line_plot(df):
       plt.xlabel('Time')
       plt.show()
 
+        
 def boxplot(df):
     fig = plt.figure()
     box = fig.add_subplot()
@@ -86,12 +93,15 @@ def boxplot(df):
     box.set_title('Distribution of ' + 'values')
     plt.show()
 
+    
 def histogram(df):
     df['Timestamp'] = pd.to_datetime(df['Timestamp'], infer_datetime_format=True)
     plt.clf()
     df['Timestamp'].map(lambda d: d.month).plot(kind='hist')
     plt.show()
-  
+ 
+
+
 def handle_option(option):
     try:
         return int(option)
