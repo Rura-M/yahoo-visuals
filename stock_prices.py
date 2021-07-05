@@ -27,7 +27,8 @@ def fetchStockData(symbol):
     }
 
     querystring = {'',
-                   "region": "US", "symbol": symbol, "interval": "1d", "range": "3mo"}
+                   "region": "US", "symbol": symbol, "interval": "1d",
+                   "range": "3mo"}
     response = requests.get(url, headers=headers, params=querystring)
 
     if response.status_code == 200:
@@ -134,15 +135,15 @@ while option != 0:
         else:
             continue
     elif option == 2:
-          update_database(df) 
+        update_database(df) 
     elif option == 3:
-          line_plot(df)
+        line_plot(df)
     elif option == 4:
-          boxplot(df)
+        boxplot(df)
     elif option == 5:
-          histogram(df)
+        histogram(df)
     else:
-          print('\nInvalid choice, select another option')
+        print('\nInvalid choice, select another option')
       
     menu()
     option = handle_option(input('Enter your option: '))
