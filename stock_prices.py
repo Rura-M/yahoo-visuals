@@ -19,7 +19,6 @@ def menu():
     ''')
     
     
-# Check to see if a connection is established
 def fetchStockData(symbol):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
     
