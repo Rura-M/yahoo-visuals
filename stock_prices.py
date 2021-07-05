@@ -57,12 +57,12 @@ def parseValues(inputdata):
                      inputdata["chart"]["result"][0]["indicators"]
                      ["quote"][0]["close"])
     return valueList
-  
+
 
 def attachEvents(inputdata):
     eventlist = []
     for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
-        eventlist.append("open")  
+        eventlist.append("open")
     for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
         eventlist.append("close")
     return eventlist    
