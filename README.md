@@ -10,9 +10,9 @@ Name | email |
 -----|------- |
 Ruramaimunashe Mutefura| r*****@gmail.com
 ## License
-[MIT](yahoo-finance-visuals/licence.txt)
+[MIT](yahoo-visuals/licence.txt)
+![](https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=<COLOR>)
 
 [![Check Style](https://github.com/Rura-M/yahoo-visuals/actions/workflows/style-test.yaml/badge.svg)](https://github.com/Rura-M/yahoo-visuals/actions/workflows/style-test.yaml)
 [![Tests](https://github.com/Rura-M/yahoo-visuals/actions/workflows/test.yaml/badge.svg)](https://github.com/Rura-M/yahoo-visuals/actions/workflows/test.yaml)
 
-![](https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=<COLOR>)
