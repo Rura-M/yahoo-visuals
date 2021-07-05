@@ -51,9 +51,11 @@ def parseTimestamp(inputdata):
 def parseValues(inputdata):
     valueList = []
     valueList.extend('',
-                     inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
+                     inputdata["chart"]["result"][0]["indicators"]
+                     ["quote"][0]["open"])
     valueList.extend('',
-                       inputdata["chart"]["result"][0]["indicators"]["quote"][0]["close"])
+                     inputdata["chart"]["result"][0]["indicators"]
+                     ["quote"][0]["close"])
     return valueList 
 
 
