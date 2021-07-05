@@ -27,15 +27,15 @@ def fetchStockData(symbol):
     }
 
     querystring = {'',
-      "region": "US", "symbol": symbol, "interval": "1d", "range": "3mo"}
+                     "region": "US", "symbol": symbol, "interval": "1d", "range": "3mo"}
     response = requests.get(url, headers=headers, params=querystring)
 
     if response.status_code == 200:
         return response.json()
     else:
         return None
+      
 
-    
 def parseTimestamp(inputdata):
     timestamplist = []
     timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
@@ -49,19 +49,19 @@ def parseTimestamp(inputdata):
 
 def parseValues(inputdata):
     valueList = []
-    valueList.extend(inputdata["chart"]["result"][0]
-    ["indicators"]["quote"][0]["open"])
-    valueList.extend(inputdata["chart"]["result"][0]
-  ["indicators"]["quote"][0]["close"])
+    valueList.extend('', 
+                     inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
+    valueList.extend('',
+                       inputdata["chart"]["result"][0]["indicators"]["quote"][0]["close"])
     return valueList 
 
 
 def attachEvents(inputdata):
     eventlist = []
     for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
-      eventlist.append("open")  
+        eventlist.append("open")  
     for i in range(0, len(inputdata["chart"]["result"][0]["timestamp"])):
-      eventlist.append("close")
+        eventlist.append("close")
     return eventlist    
 
 
