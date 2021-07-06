@@ -113,7 +113,7 @@ def handle_option(option):
         return -1
 
 
-# MAIN 
+# MAIN
 symbol = 'AAPL'
 data = {}
 responce = fetchStockData(symbol)
