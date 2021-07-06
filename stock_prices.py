@@ -26,8 +26,8 @@ def fetchStockData(symbol):
         'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com"
     }
 
-    querystring = {'',
-                   "region": "US", "symbol": symbol, "interval": "1d",
+    querystring = {
+                  "region": "US", "symbol": symbol, "interval": "1d",
                    "range": "3mo"}
     response = requests.get(url, headers=headers, params=querystring)
 
@@ -50,12 +50,9 @@ def parseTimestamp(inputdata):
 
 def parseValues(inputdata):
     valueList = []
-    valueList.extend('',
-                     inputdata["chart"]["result"][0]["indicators"]
-                     ["quote"][0]["open"])
-    valueList.extend('',
-                     inputdata["chart"]["result"][0]["indicators"]
-                     ["quote"][0]["close"])
+    valueList.extend(
+                     inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
+    valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["close"])
     return valueList
 
 
@@ -116,12 +113,12 @@ def handle_option(option):
 # MAIN
 symbol = 'AAPL'
 data = {}
-responce = fetchStockData(symbol)
+response = fetchStockData(symbol)
 # print(data)
 
-data["Timestamp"] = parseTimestamp(responce)
-data["Values"] = parseValues(responce)
-data["Events"] = attachEvents(responce)
+data["Timestamp"] = parseTimestamp(response)
+data["Values"] = parseValues(response)
+data["Events"] = attachEvents(response)
 df = pd.DataFrame(data)
 # print(df)
 
