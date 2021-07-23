@@ -119,7 +119,10 @@ df = pd.DataFrame(data)
 # print(df)
 
 menu()
-option = handle_option(input('Enter option:'))
+try:
+    option = handle_option(input('Enter option:'))
+except:
+    print('Please enter input')
 
 while option != 0:
     if option == 1:
