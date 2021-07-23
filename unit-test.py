@@ -1,5 +1,7 @@
 import unittest
 from stock_prices import fetchStockData
+import io
+import sys
 
 
 class TestFileName(unittest.TestCase):
