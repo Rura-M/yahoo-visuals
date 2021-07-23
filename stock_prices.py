@@ -1,10 +1,13 @@
 import requests
 import matplotlib.pyplot as plt
+import matplotlib
 import pandas as pd
 from datetime import datetime
 import sqlalchemy
 from sqlalchemy import create_engine
 import os
+
+matplotlib.interactive(True)
 
 
 def menu():
@@ -27,8 +30,8 @@ def fetchStockData(symbol):
     }
 
     querystring = {
-                  "region": "US", "symbol": symbol, "interval": "1d",
-                   "range": "3mo"}
+        "region": "US", "symbol": symbol, "interval": "1d",
+        "range": "3mo"}
     response = requests.get(url, headers=headers, params=querystring)
 
     if response.status_code == 200:
@@ -51,8 +54,9 @@ def parseTimestamp(inputdata):
 def parseValues(inputdata):
     valueList = []
     valueList.extend(
-                     inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
-    valueList.extend(inputdata["chart"]["result"][0]["indicators"]["quote"][0]["close"])
+        inputdata["chart"]["result"][0]["indicators"]["quote"][0]["open"])
+    valueList.extend(inputdata["chart"]["result"][0]
+                     ["indicators"]["quote"][0]["close"])
     return valueList
 
 
@@ -86,27 +90,18 @@ def line_plot(df):
 
 
 def boxplot(df):
-    fig = plt.figure()
-    box = fig.add_subplot()
-    box.line(x=df['Values'], vert=False)
-    box.set_xlabel('Values')
-    box.set_title('Distribution of ' + 'values')
-    plt.show()
+    df.boxplot(column=['Values'])
 
 
 def histogram(df):
-    df['Timestamp'] = pd.to_datetime('',
-                                     df['Timestamp'],
-                                     infer_datetime_format=True)
-    plt.clf()
-    df['Timestamp'].map(lambda d: d.month).plot(kind='hist')
-    plt.show()
+    df.hist(column='Values', grid=False)
+    plt.title('Histogram of Stock Prices')
 
 
 def handle_option(option):
     try:
         return int(option)
-    except:
+    except BaseException:
         return -1
 
 
@@ -135,7 +130,7 @@ while option != 0:
         else:
             continue
     elif option == 2:
-        update_database(df) 
+        update_database(df)
     elif option == 3:
         line_plot(df)
     elif option == 4:
@@ -143,7 +138,7 @@ while option != 0:
     elif option == 5:
         histogram(df)
     else:
-        print('\nInvalid choice, select another option') 
+        print('\nInvalid choice, select another option')
     menu()
     option = handle_option(input('Enter your option: '))
 
