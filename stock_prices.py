@@ -90,9 +90,8 @@ def line_plot(df):
 
 
 def boxplot(df):
-    df.boxplot(column=['Values'])
-    plt.title('Boxplot of values')
-
+    df.boxplot(column=['Values'], grid=False)
+    plt.title('Boxplot of Stock Prices')
 
 def histogram(df):
     df.hist(column='Values', grid=False)
