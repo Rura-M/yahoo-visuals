@@ -6,6 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      steps:
+      - uses: actions/checkout@master
+      - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ./coverage1.xml,./coverage2.xml # optional
+          flags: unittests # optional
+          name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
 
       - name: Setup python
         uses: actions/setup-python@v2
@@ -36,3 +46,5 @@ jobs:
         with:
            name: code-coverage-report
            path: htmlcov
+           
+           
