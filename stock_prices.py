@@ -122,7 +122,7 @@ menu()
 try:
     option = handle_option(input('Enter option:'))
 except BaseException:
-    print(f'Please enter input {e}')
+    print(f'Please enter input')
 
 while option != 0:
     if option == 1:
