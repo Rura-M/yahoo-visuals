@@ -17,6 +17,6 @@ Ruramaimunashe Mutefura| r*****@gmail.com
 [![Check Style](https://github.com/Rura-M/yahoo-visuals/actions/workflows/style-test.yaml/badge.svg)](https://github.com/Rura-M/yahoo-visuals/actions/workflows/style-test.yaml)
 [![Tests](https://github.com/Rura-M/yahoo-visuals/actions/workflows/test.yaml/badge.svg)](https://github.com/Rura-M/yahoo-visuals/actions/workflows/test.yaml)
 
-[![Code Coverage](https://github.com/Rura-M/yahoo-visuals/actions/workflows/coverage.yaml/badge.svg)](https://github.com/Rura-M/yahoo-visuals/actions/workflows/coverage.yaml)
+[![Coverage](https://github.com/Rura-M/yahoo-visuals/actions/workflows/coverage.yaml/badge.svg)](https://github.com/Rura-M/yahoo-visuals/actions/workflows/coverage.yaml)
 
 
