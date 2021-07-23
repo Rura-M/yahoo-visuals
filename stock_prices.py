@@ -25,7 +25,7 @@ def menu():
 def fetchStockData(symbol):
     url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart"
     headers = {
-        'x-rapidapi-key': "4b9c386372msh305d0f5e33cb633p1cee26jsn477776e57ef8",
+        'x-rapidapi-key': "4b9c386372msh305d0f5e33cb633p1cee26jsn477776xxxx",
         'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com"
     }
 
