@@ -1,6 +1,7 @@
 import unittest
 from stock_prices import fetchStockData, parseTimestamp
 import pandas as pd
+import requests
 
 
 class TestFileName(unittest.TestCase):
