@@ -22,7 +22,7 @@ jobs:
           python -m pip install sqlalchemy                            #this is new
 
       - name: Test with unittest
-        run: python3 -m unittest test.py
+        run: python3 -m unittest unit-test.py
           
       - name: Check code coverage                        #new from here down
         run: |
