@@ -40,6 +40,7 @@ def fetchStockData(symbol):
         return None
 
 
+# PARSING DATA      
 def parseTimestamp(inputdata):
     timestamplist = []
     timestamplist.extend(inputdata["chart"]["result"][0]["timestamp"])
@@ -69,6 +70,7 @@ def attachEvents(inputdata):
     return eventlist
 
 
+# DATABASES  
 def create_database(df):
     engine = create_engine('mysql://root:codio@localhost/stock_data')
     df.to_sql('stocks', con=engine, if_exists='replace', index=False)
@@ -81,6 +83,7 @@ def update_database(df):
     os.system("mysqldump -u root -pcodio stock_data > stock-file.sql")
 
 
+# PLOTS    
 def line_plot(df):
     df.plot(kind='line', x='Timestamp', y='Values', color='red')
     plt.title('Variation of stock price over time')
