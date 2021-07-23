@@ -17,6 +17,7 @@ jobs:
           python -m pip install --upgrade pip pytest
           pip install coverage                            #this is new
           pip install requests
+          pip install matplotlib
 
       - name: Test with unittest
         run: python3 -m unittest unit-test.py
