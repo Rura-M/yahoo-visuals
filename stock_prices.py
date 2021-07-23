@@ -121,7 +121,7 @@ df = pd.DataFrame(data)
 menu()
 try:
     option = handle_option(input('Enter option:'))
-except ValueError as e:
+except BaseException:
     print(f'Please enter input {e}')
 
 while option != 0:
