@@ -119,6 +119,7 @@ df = pd.DataFrame(data)
 # print(df)
 
 menu()
+option = 0
 try:
     option = handle_option(input('Enter option:'))
 except BaseException:
