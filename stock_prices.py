@@ -91,6 +91,7 @@ def line_plot(df):
 
 def boxplot(df):
     df.boxplot(column=['Values'])
+    plt.title('Boxplot of values')
 
 
 def histogram(df):
