@@ -93,7 +93,7 @@ def boxplot(df):
     df.boxplot(column=['Values'], grid=False)
     plt.title('Boxplot of Stock Prices')
 
-    
+
 def histogram(df):
     df.hist(column='Values', grid=False)
     plt.title('Histogram of Stock Prices')
