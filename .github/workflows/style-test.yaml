@@ -21,6 +21,10 @@ jobs:
               python -m pip install sqlalchemy
               python -m pip install pycodestyle
               
+      - name: Install Dependencies
+        run: | 
+              pip install flake8 pytest
+              
       - name: Check Style
         run: pycodestyle --first *.py
         
