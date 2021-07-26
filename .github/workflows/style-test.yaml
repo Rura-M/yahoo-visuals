@@ -21,7 +21,7 @@ jobs:
               python -m pip install sqlalchemy
               python -m pip install pycodestyle
               
-      - name: Install Dependencies
+      - name: Lint with flake8
         run: | 
               pip install flake8 pytest
               
