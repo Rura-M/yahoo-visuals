@@ -21,3 +21,8 @@ jobs:
       - name: Test with pytest  # This is new!
         run: |
                python3 -m unittest unit-test.py  
+               python -m pip install requests
+               python -m pip install pandas
+               python -m pip install matplotlib
+               python -m pip install sqlalchemy
+        
